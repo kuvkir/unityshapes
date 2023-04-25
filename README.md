@@ -55,6 +55,48 @@ meshRenderer.material = new Material(Shader.Find("Standard"));
 meshRenderer.material.color = Color.yellow;
 ```
 
+## API
+
+The Shape class provides the following methods for creating and manipulating
+shapes:
+
+- `MoveTo(x, y)` - Move the pen to the specified position without drawing.
+- `LineTo(x, y)` - Draw a line from the pen's current position to the specified
+  position.
+- `BezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)` - Draw a cubic Bezier curve from
+  the pen's current position to the specified position using the specified
+  control points.
+- `QuadraticCurveTo(cpx, cpy, x, y)` - Draw a quadratic Bezier curve from the
+  pen's current position to the specified position using the specified control
+  point.
+- `Absarc(x, y, radius, startAngle, endAngle, anticlockwise)` - Draw a circular
+  arc with the specified center, radius, start angle, end angle, and direction
+  (clockwise or counterclockwise).
+- `Ellipse(x, y, xRadius, yRadius, rotation, startAngle, endAngle, anticlockwise)` -
+  Draw an elliptical arc with the specified center, radii, rotation, start
+  angle, end angle, and direction (clockwise or counterclockwise).
+- `Absellipse(x, y, xRadius, yRadius, rotation, startAngle, endAngle, anticlockwise)` -
+  Draw an elliptical arc with the specified center, radii, rotation, start
+  angle, end angle, and direction (clockwise or counterclockwise) using absolute
+  values.
+- `ClosePath()` - Close the current path by drawing a line to the first point in
+  the path.
+- `GetPoints(divisions)` - Get a list of points on the shape's path.
+
+Alternatively, you can create a Shape and manually provide the list of vertices
+as follows
+
+```csharp
+List<Vector2> points = new List<Vector2>();
+for (var i = 0; i < 5 * 2; i++)
+{
+  var l = i % 2 == 1 ? 2f : 0.75f;
+  var a = i * Mathf.PI / 5;
+  points.Add(new Vector2(Mathf.Sin(a) * l, Mathf.Cos(a) * l));
+}
+Shape shape = new Shape(points);
+```
+
 ## License
 
 This library is licensed under the MIT License.
